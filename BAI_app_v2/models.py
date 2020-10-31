@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-yes_no=[("on","on"),("off","off")]
+yes_no=[("on","yes"),("off","no")]
+ratings_1_10=[('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),('8','8'),('9','9'),('10','10')]
+
 
 class ParticipantInfo(models.Model):
 
@@ -45,29 +47,52 @@ class Speed(models.Model):
         return self.tender
 
 class SafetynWellfare(models.Model):
-    monitered = models.CharField(choices=yes_no,max_length=4,blank=False)
+    monitered = models.CharField(choices=yes_no,max_length=10,blank=False)
     bywhom = models.TextField(max_length=200,blank=False)
-    measures =models.TextField(max_length=2000,blank=True)
-    medical_aid = models.CharField(choices=yes_no,max_length=4,blank=False)
-    incidents = models.CharField(choices=yes_no,max_length=4,blank=False)
-    safety_audits = models.FileField(upload_to='uploads',blank=True)
+    measures =models.TextField(max_length=200,blank=True)
+    medical_aid = models.CharField(choices=yes_no,max_length=10,blank=False)
+    incidents = models.CharField(choices=yes_no,max_length=10,blank=False)
+    safety_audits = models.FileField(upload_to='uploads/',blank=True)
 
     def __str__(self):
         return self.bywhom
 
 class Others(models.Model):
-    accomodation= models.ImageField(upload_to='uploads',blank=False)#
-    sanitary = models.ImageField(upload_to='uploads', blank=False)#
-    school = models.ImageField(upload_to='uploads', blank=True)
-    polution_measures = models.ImageField(upload_to='uploads', blank=False)#
+    accomodation= models.ImageField(upload_to='uploads/',blank=False)#
+    sanitary = models.ImageField(upload_to='uploads/', blank=False)#
+    school = models.ImageField(upload_to='uploads/', blank=True)
+    polution_measures = models.ImageField(upload_to='uploads/', blank=False)#
     ISO_accreditation = models.CharField(choices=yes_no,max_length=4,blank=True)
     conseravation_A = models.TextField(max_length=200,blank=False)
     conseravation_B = models.TextField(max_length=200,blank=False)
     renewable_energy_text = models.TextField(max_length=200,blank=True)
-    renewable_energy_pic = models.FileField(upload_to='uploads', blank=True)
+    renewable_energy_pic = models.FileField(upload_to='uploads/', blank=True)
     green_building = models.TextField(max_length=2000,blank=True)
     debris_management = models.TextField(max_length=2000, blank=True)
     seminars = models.TextField(max_length=2000, blank=True)
 
     def __str__(self):
         return self.conseravation_A
+
+class Economy(models.Model):
+    project_cost=models.FloatField(blank=False)
+    who_determined=models.TextField(blank=False,max_length=255)
+    cost_reduction=models.CharField(choices=yes_no,max_length=4,blank=False)
+    tracked_e=models.CharField(choices=yes_no,max_length=4,blank=True)
+    who_tracked=models.TextField(blank=True,max_length=255)
+    PMC_appointed=models.CharField(choices=yes_no,max_length=4,blank=True)
+    expected_cost=models.FloatField(blank=False)
+    actual_cost=models.FloatField(blank=False)
+    difficulty_e=models.CharField(choices=yes_no,max_length=4,blank=True)
+    escalated=models.TextField(blank=True,max_length=255)
+    costsaving_measures=models.TextField(blank=False,max_length=255)
+    suggestions=models.TextField(blank=True,max_length=255)
+    cost_per_sft=models.FloatField(blank=False)
+    cost_per_room=models.FloatField(blank=False)
+    cost_per_bed=models.FloatField(blank=False)
+    cost_per_workstation=models.FloatField(blank=False)
+    cost_per_similar=models.FloatField(blank=False)
+    economy_ratings=models.CharField(blank=False,choices=ratings_1_10,max_length=4)
+
+    def __str__(self):
+        return self.who_determined

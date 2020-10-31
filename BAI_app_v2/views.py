@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from BAI_app_v2.forms import ParticipantInfoForm,SignUpForm,SpeedForm,SafetynWellfareForm,OthersForm
+from BAI_app_v2.forms import ParticipantInfoForm,SignUpForm,SpeedForm,SafetynWellfareForm,OthersForm,EconomyForm
 
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse,HttpResponseRedirect
@@ -97,14 +97,15 @@ def form2(request):
     filled2 = False
     if request.method == 'POST':
 
-        safety_cat = SafetynWellfareForm(request.POST,request.FILES)
-        others_cat = OthersForm(request.POST,request.FILES)
+        safety_cat = SafetynWellfareForm(request.POST,request.FILES or None)
+        others_cat = OthersForm(request.POST,request.FILES or None)
+        economy_cat = EconomyForm(request.POST or None)
 
-        if safety_cat.is_valid() and others_cat.is_valid():
+        if safety_cat.is_valid() and others_cat.is_valid() and economy_cat.is_valid:
 
             safety_cat1 = safety_cat.save(commit=False)
-
             others_cat1 = others_cat.save(commit=False)
+            economy_cat.save()
 
             if 'safety_audits' in request.FILES:
                 safety_cat1.safety_audits = request.FILES['safety_audits']
@@ -127,12 +128,14 @@ def form2(request):
 
         else:
             print("Chuklay ikde!")
-            print(safety_cat.errors,others_cat.errors)
+            print(safety_cat.errors,others_cat.errors,economy_cat.errors)
 
     else:
         safety_cat = SafetynWellfareForm()
         others_cat = OthersForm()
+        economy_cat = EconomyForm()
         
     return render(request,'BAI_app_v2/form2.html',{'safety_cat':safety_cat,
-                                                    'others_cat':others_cat,'filled2':filled2})
+                                                    'others_cat':others_cat,
+                                                    'economy_cat':economy_cat,'filled2':filled2})
 

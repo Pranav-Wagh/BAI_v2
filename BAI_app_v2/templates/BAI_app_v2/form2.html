@@ -10,7 +10,7 @@
         {% if filled2 %}
 
             <div class="col-md-12">
-                <p class="h2 text-center">From 2 Submitted Successful!</p>
+                <p class="h2 text-center">From 2 Submitted Successfully!</p>
             </div>
             
         {% else %} 
@@ -64,8 +64,8 @@
                     </h4>
                     <!--step 2-1-->
                     <div>
-                      <form class="border border-light p-5">
-
+                      <form class="border border-light p-5" action="{% url 'BAI_app_v2:form2' %}" method="POST">
+                        {% csrf_token %}
                         <p class="h4 mb-4 text-center">Economy</p>
                         <p class="mb-4 text-center">Builder / Contractor(Fill relevant information)</p>
                         <div class="form-row">
@@ -75,7 +75,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="in Rs">
+                              <input type="text" name="project_cost" placeholder="in Rs">
                             </div>
                           </div>
                         </div>
@@ -85,7 +85,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="who_determined" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -97,11 +97,11 @@
                           <div class="col-3">
                             <div class="mt-0">
                               <label class="radio-inline">
-                                <input type="radio" >YES
+                                <input type="radio" name="cost_reduction">YES
                               </label>
                               &emsp;
                               <label class="radio-inline">
-                                <input type="radio">NO
+                                <input type="radio" name="cost_reduction">NO
                               </label>
                             </div>
                           </div>
@@ -114,11 +114,11 @@
                           <div class="col-3">
                             <div class="mt-0">
                               <label class="radio-inline" data-toggle="collapse" data-target="#collapseExample1">
-                                <input type="radio" >YES
+                                <input type="radio" name="tracked_e">YES
                               </label>
                               &emsp;
                               <label class="radio-inline">
-                                <input type="radio">NO
+                                <input type="radio" name="tracked_e">NO
                               </label>
                             </div>
                           </div>
@@ -131,7 +131,7 @@
                               </div>
                               <div class="col-3">
                                 <div class="md-form mt-0">
-                                  <input type="text" placeholder="">
+                                  <input type="text" name="who_tracked" placeholder="">
                                 </div>
                               </div>
                             </div>
@@ -144,11 +144,11 @@
                           <div class="col-3">
                             <div class="mt-0">
                               <label class="radio-inline">
-                                <input type="radio">YES
+                                <input type="radio" name="PMC_appointed">YES
                               </label>
                               &emsp;
                               <label class="radio-inline">
-                                <input type="radio">NO
+                                <input type="radio" name="PMC_appointed">NO
                               </label>
                             </div>
                           </div>
@@ -160,7 +160,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="expected_cost" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -171,7 +171,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="actual_cost" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -184,11 +184,11 @@
                           <div class="col-3">
                             <div class="mt-0">
                               <label class="radio-inline" data-toggle="collapse" data-target="#collapseExample1">
-                                <input type="radio">YES
+                                <input type="radio" name="difficulty_e">YES
                               </label>
                               &emsp;
                               <label class="radio-inline">
-                                <input type="radio">NO
+                                <input type="radio" name="difficulty_e">NO
                               </label>
                             </div>
                           </div>
@@ -202,7 +202,7 @@
                               </div>
                               <div class="col-3">
                                 <div class="md-form mt-0">
-                                  <input type="text" placeholder="in Rs">
+                                  <input type="text" name="escalated" placeholder="in Rs">
                                 </div>
                               </div>
                             </div>
@@ -215,7 +215,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="costsaving_measures" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -226,7 +226,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="suggestions" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -237,7 +237,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="cost_per_sft" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -247,7 +247,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="cost_per_room" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -257,7 +257,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="cost_per_bed" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -267,7 +267,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="cost_per_workstation" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -277,7 +277,7 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <input type="text" name="cost_per_similar" placeholder="">
                             </div>
                           </div>
                         </div>
@@ -290,7 +290,20 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              <input type="text" placeholder="">
+                              <!--<input type="text" name="economy_ratings" placeholder="">-->
+                              <select class="mdb-select dropdown-primary">
+                                <option value="" disabled selected>Select Rating</option>
+                                <option value="1" name="economy_ratings">1</option>
+                                <option value="2" name="economy_ratings">2</option>
+                                <option value="3" name="economy_ratings">3</option>
+                                <option value="4" name="economy_ratings">4</option>
+                                <option value="5" name="economy_ratings">5</option>
+                                <option value="6" name="economy_ratings">6</option>
+                                <option value="7" name="economy_ratings">7</option>
+                                <option value="8" name="economy_ratings">8</option>
+                                <option value="9" name="economy_ratings">9</option>
+                                <option value="10" name="economy_ratings">10</option>
+                              </select>
                             </div>
                           </div>
                         </div>
