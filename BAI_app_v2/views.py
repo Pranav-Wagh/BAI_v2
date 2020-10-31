@@ -82,6 +82,7 @@ def form1(request):
 
             filled = True
 
+
         else:
             print("Chuklay ikde!")
             print(speed_cat.errors)
@@ -97,11 +98,11 @@ def form2(request):
     filled2 = False
     if request.method == 'POST':
 
-        safety_cat = SafetynWellfareForm(request.POST,request.FILES or None)
-        others_cat = OthersForm(request.POST,request.FILES or None)
-        economy_cat = EconomyForm(request.POST or None)
+        safety_cat = SafetynWellfareForm(request.POST,request.FILES)
+        others_cat = OthersForm(request.POST,request.FILES)
+        economy_cat = EconomyForm(request.POST)
 
-        if safety_cat.is_valid() and others_cat.is_valid() and economy_cat.is_valid:
+        if safety_cat.is_valid() and others_cat.is_valid() and economy_cat.is_valid():
 
             safety_cat1 = safety_cat.save(commit=False)
             others_cat1 = others_cat.save(commit=False)
@@ -127,8 +128,15 @@ def form2(request):
             filled2 = True
 
         else:
-            print("Chuklay ikde!")
-            print(safety_cat.errors,others_cat.errors,economy_cat.errors)
+            print("Chuklay ikde!1")
+            print(safety_cat.errors)
+            print("***************")
+            print(others_cat.errors)
+            print("***************")
+            print(economy_cat.errors)
+            xyz = request.POST.get('monitered')
+            print(xyz)
+            
 
     else:
         safety_cat = SafetynWellfareForm()

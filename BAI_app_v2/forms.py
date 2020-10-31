@@ -9,7 +9,6 @@ class SignUpForm(forms.ModelForm):
         model = User
         fields = ('username','email','password')
 
-
 class ParticipantInfoForm(forms.ModelForm):
     class Meta():
         model = ParticipantInfo

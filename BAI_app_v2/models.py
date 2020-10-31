@@ -92,7 +92,7 @@ class Economy(models.Model):
     cost_per_bed=models.FloatField(blank=False)
     cost_per_workstation=models.FloatField(blank=False)
     cost_per_similar=models.FloatField(blank=False)
-    economy_ratings=models.CharField(blank=False,choices=ratings_1_10,max_length=4)
+    economy_ratings=models.TextField(blank=False,max_length=100)
 
     def __str__(self):
         return self.who_determined
