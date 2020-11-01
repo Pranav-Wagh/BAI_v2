@@ -96,3 +96,66 @@ class Economy(models.Model):
 
     def __str__(self):
         return self.who_determined
+
+
+class Project_info(models.Model):
+    project_name = models.TextField(max_length=200,blank=False)
+    project_address=models.TextField(max_length=200,blank=False)
+    site_map=models.FileField(upload_to="uploads/",blank=True)
+    client_name=models.TextField(max_length=200,blank=False)
+    project_cost=models.IntegerField(blank=False)
+    applicant_role=models.TextField(max_length=200,blank=False)
+    applicant_scope=models.TextField(max_length=200,blank=False)
+    applicantWork_cost=models.IntegerField(blank=False)
+    #time_limit=models.DateTimeField(blank=True)
+    commencement_date=models.DateTimeField(blank=False)
+    sched_completion_date=models.DateTimeField(blank=False)
+    act_completion_date=models.DateTimeField(blank=False)
+    proj_cost_tilldate=models.IntegerField(blank=False)
+    Architect_name=models.CharField(max_length=200,blank=True)
+    Structural_Consultant_name = models.CharField(max_length=200, blank=True)
+    Plumbing_Consultant_name = models.CharField(max_length=200,blank=True)
+    Fire_Consultant_name = models.CharField(max_length=200,blank=True)
+    Landscaping_Consultant_name = models.CharField(max_length=200, blank=True)
+    HVAC_Consultant_name = models.CharField(max_length=200,blank=True)
+    Electrical_Consultant_name = models.CharField(max_length=200, blank=True)
+    Interior_Designer_name = models.CharField(max_length=200, blank=True)
+    Project_Management_Consultant_name = models.CharField(max_length=200, blank=True)
+    MoEF_Consultant_name = models.CharField(max_length=200, blank=True)
+
+    req_docs=models.FileField(upload_to="uploads/",blank=True)
+
+    green_proj=models.CharField(max_length=1000, choices=yes_no,blank=True)
+    green_project_details=models.FileField(upload_to="uploads/",blank=True)
+
+    def __str__(self):
+        return self.project_name
+
+class Quality(models.Model):
+
+    any_system_for_coordinating_of_all_drawings=models.CharField(max_length=1000, choices=yes_no,blank=True)
+    drawing_coordinating_system=models.TextField(max_length=1000, blank=True)
+    PMC=models.CharField(max_length=1000, choices=yes_no,blank=True)
+    drawing_specification_assessment=models.CharField(max_length=1000, choices=yes_no,blank=False)
+    consultant_visit_frequency=models.IntegerField(blank=True)
+    Decision_recorded=models.CharField(max_length=1000, choices=yes_no,blank=False)
+    meeting_instruction_book_minute=models.FileField(upload_to="uploads/",blank=True)
+    quality_standard_tender=models.CharField(max_length=1000, choices=yes_no,blank=False)
+    name_of_quality_standard_approver=models.CharField(max_length=1000,blank=True)
+    in_house_team_quality_control=models.CharField(max_length=1000, choices=yes_no,blank=True)
+    external_team_to_control_quality=models.CharField(max_length=1000, choices=yes_no,blank=True)
+    list_quality_assurance_tests_OnSite=models.TextField(max_length=100,blank=False)
+    list_quality_assurance_tests_Off_Site = models.TextField(max_length=100,blank=False)
+    sample_Checklist_followed=models.FileField(upload_to="uploads/",blank=True)
+    sample_test_reports=models.FileField(upload_to="uploads/",blank=True)
+    any_special_training_programs=models.CharField(max_length=1000, choices=yes_no,blank=True)
+    If_Yes_Provide_details= models.TextField(max_length=100,blank=True)
+    any_special_training_programs_workers=models.CharField(max_length=1000, choices=yes_no,blank=True)
+    If_Yes_Provide_details_workers= models.TextField(max_length=100,blank=True)
+    any_Supervision_from_Client_side=models.CharField(max_length=1000, choices=yes_no,blank=False)
+    Any_other_system_method_mechanism_adopted=models.CharField(max_length=1000, choices=yes_no,blank=True)
+    system_method_mechanism_adopted=models.TextField(max_length=100,blank=True)
+    rate_your_project_in_terms_of_quality=models.IntegerField(blank=False)
+
+    def __str__(self):
+        return self.any_system_for_coordinating_of_all_drawings

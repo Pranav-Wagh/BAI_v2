@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from BAI_app_v2.forms import ParticipantInfoForm,SignUpForm,SpeedForm,SafetynWellfareForm,OthersForm,EconomyForm
+from BAI_app_v2.forms import ParticipantInfoForm,SignUpForm,SpeedForm,SafetynWellfareForm,OthersForm,EconomyForm,Project_infoForm,QualityForm
 
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse,HttpResponseRedirect
@@ -75,23 +75,48 @@ def form1(request):
     if request.method == 'POST':
 
         speed_cat = SpeedForm(data=request.POST)
+        project_info_cat = Project_infoForm(request.POST,request.FILES)
+        quality_cat = QualityForm(request.POST,request.FILES)
         
-        if speed_cat.is_valid():
+        if speed_cat.is_valid() and project_info_cat.is_valid() and quality_cat.is_valid():
             speed_cat1 = speed_cat.save()
             speed_cat1.save()
+
+            project_info_cat1 = project_info_cat.save(commit=False)
+            quality_cat1 = quality_cat.save(commit=False)   
+
+            if 'req_docs' in request.FILES:
+                project_info_cat1.req_docs = request.FILES['req_docs']  
+            if 'site_map' in request.FILES:
+                project_info_cat1.site_map = request.FILES['site_map'] 
+            if 'green_project_details' in request.FILES:
+                project_info_cat1.green_project_details = request.FILES['green_project_details']  
+
+            if 'meeting_instruction_book_minute' in request.FILES:
+                quality_cat1.meeting_instruction_book_minute = request.FILES['meeting_instruction_book_minute']
+            if 'sample_Checklist_followed' in request.FILES:
+                quality_cat1.sample_Checklist_followed = request.FILES['sample_Checklist_followed']
+            if 'sample_test_reports' in request.FILES:
+                quality_cat1.sample_test_reports = request.FILES['sample_test_reports']
+                   
+            project_info_cat1.save()
+            quality_cat1.save()
 
             filled = True
 
 
         else:
             print("Chuklay ikde!")
-            print(speed_cat.errors)
+            print(speed_cat.errors,project_info_cat.errors,quality_cat.errors)
 
     else:
         speed_cat = SpeedForm()
+        project_info_cat = Project_infoForm()
+        quality_cat = QualityForm()
         
     return render(request,'BAI_app_v2/form1.html',{'speed_cat':speed_cat,
-                                                    'filled':filled})
+                                                    'project_info_cat':project_info_cat,
+                                                    'quality_cat':quality_cat,'filled':filled})
 
 
 def form2(request):
@@ -130,12 +155,8 @@ def form2(request):
         else:
             print("Chuklay ikde!1")
             print(safety_cat.errors)
-            print("***************")
             print(others_cat.errors)
-            print("***************")
             print(economy_cat.errors)
-            xyz = request.POST.get('monitered')
-            print(xyz)
             
 
     else:
